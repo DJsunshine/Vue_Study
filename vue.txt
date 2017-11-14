@@ -1,0 +1,18 @@
+#注意事项
+由于JavaScript的限制，Vue不能检测一下变动的数据：
+1.当你利用索引直接设置一个项时，例如：vm.items[indexOfItem]=newValue
+2.当你修改数组的长度时，例如：vm.items.length=newLength
+
+为解决以上问题 采用
+用索引改变值 {
+Vue.set(example1.items,indexOfItem,newValue)
+
+example.items.splice(indexOfItem,1,newValue)
+}
+
+解决第二个问题 使用splice
+example1.items.splice(newLength)
+
+vue不能检测对象属性的添加和删除
+
+

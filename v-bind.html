@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件化构建</title>
+		<style type="text/css">
+			
+		</style>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app-7">
+			<span v-for="item in groceryList" v-once>
+				<li>你好{{item.text}}</li>
+			</span>
+			<ol>
+				<!--
+					现在我们为每个todo-item提供todo对象
+					todo对象是变量，即其内容可以是动态的。
+					我们也需要为每个组件提供一个‘key’，晚些时候我们会做个解释。(暂不清楚教程上给的这个东西是干嘛的)
+				-->
+				<todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+					
+				</todo-item>
+			</ol>
+		</div>
+		<hr />
+		<div id="demo">
+			{{fullName}}
+		</div>
+		
+		<div id="app-8">
+			{{fullName}}
+		</div>
+		<script type="text/javascript">
+			Vue.component('todo-item',{
+				//todo-item 组件现在接受一个  为一个模板的名字
+				//"props",类似于一个自定义属性  暂不清楚这个东西是干嘛的  
+				// 这个属性名为todo
+				props:['todo'],
+				template:'<li>{{todo.text}}</li>'
+			})
+			
+			var app7=new Vue({
+				el:'#app-7',
+				data:{
+					groceryList:[
+					 {id:0,text:'蔬菜'},
+					 {id:1,text:'奶酪'},
+					 {id:2,text:'随便其他什么人吃的东西vvvvs'}
+					]
+				}
+			})
+			//56-85 行是计算属性 和优化代码 监听属性
+			//代码命令式且重复  
+			//此处 还有一种方面 是设置 set和get方面  具体官网找案例
+			var app8=new Vue({
+				el:'#demo',
+				data:{
+					firstName:'Foo',
+					lastName:'Bar',
+					fullName:'Foo Bar'
+				},
+				watch:{
+					firstName:function(val){
+						this.fullName=val + ''+this.lastName
+					},
+					lastName:function(val){
+						this.fullName=this.firstName+''+val
+					}
+				}
+			})
+			
+			//优化上述代码
+			var app8_8=new Vue({
+				el:'#app-8',
+				data:{
+					firstName:'Two',
+					lastName:'Long'
+				},
+				computed:{
+					fullName:function(){
+						return this.firstName+" "+this.lastName
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
