@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--父组件的数据通过prop下发到子组件中   子组件通过props选项声明预期的数据-->
+		<div id="div">
+			<child message="hello"></child>
+		</div>
+		
+		<hr />
+		
+		<div id="btn">
+			<input v-model="parentMsg" />
+			<br />
+			<children v-bind:my-message="parentMsg"></children>
+		<comp v-bind:some-prop="1"></comp>
+			
+		</div>
+		
+		<br />
+
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			Vue.component('child',{
+				props:['message'],
+				template:'<span>{{message}}</span>'
+			})
+			
+			new Vue({
+				el:'#div'
+			})
+			
+			
+			//局部注册
+			var childone={
+				props:['myMessage'],
+				template:'<p>{{myMessage}}</p>'
+			}
+			var app=new Vue({
+				el:'#btn',
+				data:{
+					parentMsg:'你好'
+				},
+				components:{
+				'children':childone
+				}
+			})
+		</script>
+	</body>
+</html>

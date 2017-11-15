@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>显示过来/排序结果</title>
+	</head>
+	<body>
+		<ol id="a">
+		<li  v-for="n in evenNumbers">{{n}}</li>
+		</ol>
+		
+		<hr />
+		<ul id="b">
+			<li v-for="n in even(numbers)">{{n}}</li>
+			<li class="divider"></li>
+			<div>
+			<span v-for="n in 10">{{n}}</span>
+		</div>
+		</ul>
+		<hr />
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#a',
+				data:{
+					numbers:[1,2,3,4,5]
+				},
+				computed:{
+					evenNumbers:function(){
+						return this.numbers.filter(function(number){
+							return number % 2===0
+						})
+					}
+				}
+			})
+			
+			var app2=new Vue({
+				el:'#b',
+				data:{
+					numbers:[1,2,3,4,5]
+				},
+				methods:{
+					even:function(numbers){
+						return numbers.filter(function(number){
+							return number % 2 ===0
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

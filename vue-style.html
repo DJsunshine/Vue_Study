@@ -32,8 +32,35 @@
 		<div id="app_one" v-for="o in data">
 			o
 		</div>
+		<hr />
+		<div id="btn">
+			<li>{{ob.a}}</li>
+			<li>{{ob.b}}</li>
+			<li>{{ob.age}}</li>
+			
+		</div>
+		
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var app2=new Vue({
+				el:'#btn',
+				data:{
+					ob:{
+						a:2,
+						c:3
+					}
+					
+				}
+				
+//				this.$set(this.ob,'age',27)
+				
+				
+			})
+			
+//			app2.b=2;//这个方法是不可用的
+			Vue.set(app2.ob,'b',3)
+			
+			
 			var app=new Vue({
 				el:'#app',
 				data:{
@@ -61,6 +88,8 @@
 					fontSize:30
 				}
 			})
+			
+			
 		</script>
 	</body>
 </html>

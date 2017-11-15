@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件</title>
+	</head>
+	<body>
+		<div id="example">
+			<my-component></my-component>
+		</div>
+		
+		<hr />
+		<div id="example1" :style="{color:fcolor}">
+			<my-component></my-component>
+		</div>
+		
+		<hr />
+		<table id="tab">
+			<my-row>...</my-row>
+		</table>
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//全局注册
+			Vue.component('my-component',{
+				template:'<div>A custom component!</div>'
+			})
+			
+			new Vue({
+				el:'#example',
+				
+			})
+			
+			//局部注册
+			var Child={
+				template:'<div>A custom component!</div>'
+			}
+			
+			var app=new Vue({
+				el:'#example1',
+				data:{
+					fcolor:'red'
+				},
+				components:{
+					'my-component':Child
+				}
+			})
+			
+			var Child1={
+				template:'<tr>ssss</tr>'
+			}
+			var app1 = new Vue({
+				el:'#tab',
+				components:{
+					'my-row':Child1
+				}
+			})
+		</script>
+	</body>
+</html>
