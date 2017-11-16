@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+      <h1>Named Routes</h1>
+      <p>Current route name: {{ $route.name }}</p>
+      <ul>
+      	<!--<li><router-link :to="{ name: '' }">work</router-link></li>-->
+        <li><router-link :to="{ name: 'home' }">home</router-link></li>
+        <li><router-link :to="{ name: 'foo' }">fooo</router-link></li>
+        <li><router-link :to="{ name: 'bar', params: { id: 123 }}">bar</router-link></li>
+      </ul>
+      <router-view class="view"></router-view>
+    </div>
+	</body>
+	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+
+Vue.use(VueRouter)
+
+const Home = { template: '<div>This is Home</div>' }
+const Foo = { template: '<div>This is Foo</div>' }
+const Bar = { template: '<div>This is Bar {{ $route.params.id }}</div>' }
+
+const router = new VueRouter({
+  mode: 'history',
+//base: __dirname,
+  routes: [
+  //  /默认路由指向
+    { path: '/', name: 'home', component: Home },
+    { path: '/foo', name: 'foo', component: Foo },
+    { path: '/bar/:id', name: 'bar', component: Bar },
+    {path:'*',component:Home} 
+    //404页面设置
+  ]
+})
+
+new Vue({
+  router
+//template: `
+//  
+//`
+}).$mount('#app')
+	</script>
+</html>
